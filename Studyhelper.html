@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyHub - Your Ultimate Study Helper</title>
+    <style>
+        /* --- CSS STYLES --- */
+        :root {
+            --primary-color: #4a90e2;
+            --secondary-color: #f5f7fa;
+            --text-color: #333;
+            --text-light: #666;
+            --accent-color: #ff6b6b;
+            --white: #ffffff;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--secondary-color);
+            font-size: 16px;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            margin-left: 25px;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .btn-cta {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 10px 24px;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+
+        .btn-cta:hover {
+            background: #357abd;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 85vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1920&q=80') no-repeat center center/cover;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--white);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            max-width: 700px;
+            margin-bottom: 35px;
+            color: #f5f5f5;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+
+        .hero-btn {
+            padding: 16px 35px;
+            background: var(--accent-color);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .hero-btn:hover {
+            transform: scale(1.05);
+            background: #e55a5a;
+        }
+
+        /* Section Styles */
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 5%;
+            background: var(--white);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 35px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            text-align: center;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border: 1px solid #e8e8e8;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 35px rgba(0,0,0,0.15);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 30px;
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+            color: #222;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .card p {
+            color: var(--text-light);
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 80px 5%;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+        }
+
+        .contact-wrapper {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .contact-info {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .contact-info h3 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .person-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .person-card:last-child {
+            margin-bottom: 0;
+        }
+
+        .person-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 15px;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 1.05rem;
+            color: var(--text-light);
+        }
+
+        .contact-detail span {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+
+        .contact-detail a {
+            color: var(--text-light);
+            text-decoration: none;
+        }
+
+        .contact-detail a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Contact Form */
+        .contact-form-container {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .contact-form-container h3 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            color: #333;
+            font-size: 1.05rem;
+        }
+
+        .form-group input, 
+        .form-group textarea {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .form-group input:focus, 
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            height: 140px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--primary-color);
+            color: var(--white);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.15rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #357abd;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: var(--white);
+            text-align: center;
+            padding: 25px;
+        }
+
+        footer p {
+            font-size: 1.05rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1.1rem; }
+            .contact-wrapper { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .section-title { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">📚 StudyHub</div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#features">Features</a>
+            <a href="#contact" class="btn-cta">Contact Us</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>Boost Your Productivity</h1>
+        <p>Your personal assistant for better study habits. Track tasks, manage time, and achieve your academic goals with ease.</p>
+        <a href="#features" class="hero-btn">Explore Features</a>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <h2 class="section-title">What We Offer</h2>
+        <div class="features-grid">
+            <!-- Feature 1: Smart Planner -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=600&q=80" alt="Smart Planner" class="card-img">
+                <div class="card-content">
+                    <h3>📝 Smart Planner</h3>
+                    <p>Organize your assignments and deadlines in one simple dashboard. Never miss a due date again!</p>
+                </div>
+            </div>
+
+            <!-- Feature 2: Pomodoro Timer -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80" alt="Pomodoro Timer" class="card-img">
+                <div class="card-content">
+                    <h3>⏱️ Pomodoro Timer</h3>
+                    <p>Built-in focus timer to keep you on track with smart breaks in between study sessions.</p>
+                </div>
+            </div>
+
+            <!-- Feature 3: Note Sharing -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=600&q=80" alt="Note Sharing" class="card-img">
+                <div class="card-content">
+                    <h3>📒 Note Sharing</h3>
+                    <p>Upload and share your class notes with classmates instantly. Study together, ace together!</p>
+                </div>
+            </div>
+
+            <!-- Feature 4: Focus Music -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1614680376593-902f74cf0d41?w=600&q=80" alt="Focus Music" class="card-img">
+                <div class="card-content">
+                    <h3>🎵 Focus Music</h3>
+                    <p>Access curated lo-fi beats and nature sounds to help you concentrate while studying.</p>
+                </div>
+            </div>
+
+            <!-- Feature 5: Online Tutoring -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=600&q=80" alt="Online Tutoring" class="card-img">
+                <div class="card-content">
+                    <h3>👨‍🏫 Online Tutoring</h3>
+                    <p>Connect with expert tutors for one-on-one sessions. Get help in any subject, anytime.</p>
+                </div>
+            </div>
+
+            <!-- Feature 6: Study Group -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&q=80" alt="Study Group" class="card-img">
+                <div class="card-content">
+                    <h3>👥 Study Groups</h3>
+                    <p>Join or create study groups with fellow students. Collaborate and learn better together!</p>
+                </div>
+            </div>
+
+            <!-- Feature 7: Digital Library -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=600&q=80" alt="Digital Library" class="card-img">
+                <div class="card-content">
+                    <h3>📚 Digital Library</h3>
+                    <p>Access thousands of e-books, journals, and educational resources all in one place.</p>
+                </div>
+            </div>
+
+            <!-- Feature 8: Progress Tracker -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80" alt="Progress Tracker" class="card-img">
+                <div class="card-content">
+                    <h3>📊 Progress Tracker</h3>
+                    <p>Monitor your academic progress with detailed analytics. Set goals and achieve them!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2 class="section-title">Contact Us</h2>
+        
+        <div class="contact-wrapper">
+            <!-- Contact Information -->
+            <div class="contact-info">
+                <h3>📞 Get In Touch</h3>
+                <p style="margin-bottom: 25px; color: #666; font-size: 1.05rem;">Have questions? Feel free to reach out to us through any of these channels:</p>
+                
+                <!-- Person 1: Melody N. Alvarez -->
+                <div class="person-card">
+                    <div class="person-name">👤 Melody N. Alvarez</div>
+                    <div class="contact-detail">
+                        <span>📱</span>
+                        <a href="tel:09486381299">09486381299</a>
+                    </div>
+                    <div class="contact-detail">
+                        <span>📧</span>
+                        <a href="mailto:melodya496@gmail.com">melodya496@gmail.com</a>
+                    </div>
+                    <div class="contact-detail">
+                        <span>📘</span>
+                        <a href="https://facebook.com" target="_blank">Melody N. Alvarez</a>
+                    </div>
+                </div>
+
+                <!-- Person 2: Benidect John R. Adobas -->
+                <div class="person-card">
+                    <div class="person-name">👤 Benidect John R. Adobas</div>
+                    <div class="contact-detail">
+                        <span>📱</span>
+                        <a href="tel:09630972136">09630972136</a>
+                    </div>
+                    <div class="contact-detail">
+                        <span>📧</span>
+                        <a href="mailto:benidectadobs@gmail.com">benidectadobs@gmail.com</a>
+                    </div>
+                    <div class="contact-detail">
+                        <span>📘</span>
+                        <a href="https://facebook.com" target="_blank">Benidect John R. Adobas</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="contact-form-container">
+                <h3>💌 Send Us a Message</h3>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" placeholder="How can we help you?" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 StudyHub. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault
